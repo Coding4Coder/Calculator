@@ -1,0 +1,264 @@
+
+
+import React from 'react';
+import "../../style/global.css";
+import { useState } from "react";
+
+const Calc = () => {
+
+    const[result, setResult] = useState("");
+
+    const handleClick = (e) => {
+        setResult(result.concat(e.target.name));
+    }
+   const clear = () => {
+    setResult("");
+   }
+
+   const backspace = () =>{
+         setResult(result.slice(0,-1));
+   }
+   const calculate = () => {
+       try{
+        setResult(eval(result).toString());
+       } 
+       catch(err){
+        setResult("Error")
+       }
+   
+   }
+
+    return (
+        <div className="row txt-sm bdr-btm g-0">
+                <div className="calc">
+                  <form>
+                      <input type="text" onChange={(e)=> setResult(e.target.value)} value={ result } />
+                  </form>
+                  <div className="row">
+                     <div className="keypad">
+                        <button onClick={ handleClick } className="btn" onClick={clear}>Clear</button>
+                        <button onClick={ handleClick } className="btn" onClick={backspace}>Delete</button>
+                        <button name="/" onClick={ handleClick } className="btn">&divide;</button>
+                        <button name="-" onClick={ handleClick } className="btn">&ndash;</button>
+                    </div>
+                    <div className="keypad">
+                        <button name="7" onClick={ handleClick } className="btn">7</button>
+                        <button name="8" onClick={ handleClick } className="btn">8</button>
+                        <button name="9" onClick={ handleClick } className="btn">9</button>
+                        <button name="X" onClick={ handleClick } className="btn">&times;</button>
+                    </div>
+                    <div className="keypad">
+                        <button name="4" onClick={ handleClick } className="btn">4</button>
+                        <button name="5" onClick={ handleClick } className="btn">5</button>
+                        <button name="6" onClick={ handleClick } className="btn">6</button>
+                        <button name="+" onClick={ handleClick } className="btn">+</button>
+                    </div>
+                    <div className="keypad">
+                       
+                        <button name="1" onClick={ handleClick } className="btn">1</button>
+                        <button name="2" onClick={ handleClick } className="btn">2</button>
+                        <button name="3" onClick={ handleClick } className="btn">3</button>
+                        <button onClick={ calculate } className="btn">=</button>
+                    </div>
+                    <div className="keypad">
+                        <button name="." onClick={ handleClick } className="btn">.</button>
+                        <button name="0" onClick={ handleClick } className="btn">0</button>
+                       
+                    </div>
+
+                  </div>
+                </div>
+        </div>
+    );
+}
+export default Calc;
+
+//// here is my css
+
+.main-container{
+  padding: 1rem;
+  margin: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  border-bottom: 4px solid rgb(117, 101, 101);
+  
+}
+.header{
+  background: rgb(0, 101, 196);
+}
+.title{
+  background: rgb(34, 147, 175);
+  border-top: 1px solid rgb(7, 87, 124);
+  font-size: 1.3rem;
+  padding: .65rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+
+.txt{
+  font-size: 1.4rem;
+}
+.txt.sm{
+  font-size: 1.2rem;
+}
+
+.bdr{
+  border: 1px solid rgb(5, 91, 126);
+  padding: 0;
+  margin: 0;
+}
+.bdr-btm{
+  border-bottom: 1px solid rgb(5, 110, 180);
+
+}
+.row{
+  padding: .5rem;
+}
+.btn {
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+  height: 40px;
+  line-height: 40px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+  z-index: 9;
+  border: 0;
+  transition: box-shadow .2s;
+  font-size: 1.4rem;
+}
+
+.btn:hover {
+  box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
+}
+
+.btn-green{
+  background-color: initial;
+  background-image: linear-gradient(-180deg, rgb(39, 68, 32), rgb(96, 139, 109));
+    }
+    .btn-blue{
+      background-color: initial;
+      background-image: linear-gradient(-180deg, rgb(49, 179, 255), rgb(17, 45, 63));
+      padding: 0 2rem !important;
+      color: #FFFFFF !important;
+      font-size: 1.4rem !important;
+    }
+    .btn-orange{
+      background-color: initial;
+      background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
+    }
+  
+  .text-center{
+    text-align: center;
+  }
+  .fix-img{
+    width: 100%;
+    height: 100%;
+  }
+  .homeBg{
+    background: url();
+  }
+  .pet-card{
+    overflow: hidden;
+    border-radius: 10px;
+    border: 4px solid rgb(193, 235, 248);
+    margin: 1rem 0 ;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .pet-card:hover{
+    overflow: hidden;
+    border-radius: 10px;
+    border: 4px solid rgb(193, 235, 248);
+  }
+.read-more{
+  background: rgb(88, 163, 233);
+  border-radius: 4px;
+  padding: 1rem;
+  text-align: center;
+}
+.read-more a:link, .read-more a:visited{
+  color: azure;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+.read-more a:hover{
+  color: rgb(20, 72, 82);
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+.pet-card h2{
+  text-align: center;
+}
+
+.login-form{
+  padding: 1rem;
+  margin: 2rem auto;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  background: rgb(2, 71, 83);
+  
+}
+.login-form input{
+    padding: .52rem;
+    margin: .75rem;
+    border-radius: 2px;
+    width: 300px;
+}
+.result{
+  padding: 1rem;
+  margin: 2rem auto;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgb(56, 129, 134);
+}
+.result span{
+  padding-right: .5rem;
+
+}
+
+.calc{
+  padding: 1rem;
+  margin: 2rem auto;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px !important;
+  background: rgb(2, 71, 83);
+  
+}
+.calc input{
+    padding: .52rem;
+    margin: .75rem;
+    border-radius: 2px;
+    width: 300px;
+    outline: none;
+}
+.keypad {
+ 
+  margin: 0 auto !important;
+}
+.keypad button{
+  width: 75px !important;
+  background: rgba(13, 132, 168) !important;
+  border: 1px solid black;
+}
+.keypad button:hover{
+  width: 75px !important;
+  background: rgba(13, 132, 168, 0.25) !important;
+}
