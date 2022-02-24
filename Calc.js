@@ -36,8 +36,8 @@ const Calc = () => {
                   </form>
                   <div className="row">
                      <div className="keypad">
-                        <button onClick={ handleClick } className="btn" onClick={clear}>Clear</button>
-                        <button onClick={ handleClick } className="btn" onClick={backspace}>Delete</button>
+                        <button  className="btn" onClick={clear}>Clear</button>
+                        <button  className="btn" onClick={backspace}>Delete</button>
                         <button name="/" onClick={ handleClick } className="btn">&divide;</button>
                         <button name="-" onClick={ handleClick } className="btn">&ndash;</button>
                     </div>
