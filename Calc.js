@@ -1,74 +1,76 @@
 
-
-import React from 'react';
-import "../../style/global.css";
 import { useState } from "react";
+import MainHeading from "../../Components/MainHeading";
+import "./Calc.scss";
 
 const Calc = () => {
 
-    const[result, setResult] = useState("");
+    const[result, setResult] = useState("0");
 
-    const handleClick = (e) => {
-        setResult(result.concat(e.target.name));
+    const inputHandler = (e) => {
+        setResult(e.target.value)
     }
-   const clear = () => {
+
+const clear = () =>{
     setResult("");
-   }
-
-   const backspace = () =>{
-         setResult(result.slice(0,-1));
-   }
-   const calculate = () => {
-       try{
-        setResult(eval(result).toString());
-       } 
-       catch(err){
-        setResult("Error")
-       }
-   
-   }
-
-    return (
-        <div className="row txt-sm bdr-btm g-0">
-                <div className="calc">
-                  <form>
-                      <input type="text" onChange={(e)=> setResult(e.target.value)} value={ result } />
-                  </form>
-                  <div className="row">
-                     <div className="keypad">
-                        <button  className="btn" onClick={clear}>Clear</button>
-                        <button  className="btn" onClick={backspace}>Delete</button>
-                        <button name="/" onClick={ handleClick } className="btn">&divide;</button>
-                        <button name="-" onClick={ handleClick } className="btn">&ndash;</button>
-                    </div>
-                    <div className="keypad">
-                        <button name="7" onClick={ handleClick } className="btn">7</button>
-                        <button name="8" onClick={ handleClick } className="btn">8</button>
-                        <button name="9" onClick={ handleClick } className="btn">9</button>
-                        <button name="X" onClick={ handleClick } className="btn">&times;</button>
-                    </div>
-                    <div className="keypad">
-                        <button name="4" onClick={ handleClick } className="btn">4</button>
-                        <button name="5" onClick={ handleClick } className="btn">5</button>
-                        <button name="6" onClick={ handleClick } className="btn">6</button>
-                        <button name="+" onClick={ handleClick } className="btn">+</button>
-                    </div>
-                    <div className="keypad">
-                       
-                        <button name="1" onClick={ handleClick } className="btn">1</button>
-                        <button name="2" onClick={ handleClick } className="btn">2</button>
-                        <button name="3" onClick={ handleClick } className="btn">3</button>
-                        <button onClick={ calculate } className="btn">=</button>
-                    </div>
-                    <div className="keypad">
-                        <button name="." onClick={ handleClick } className="btn">.</button>
-                        <button name="0" onClick={ handleClick } className="btn">0</button>
-                       
-                    </div>
-
-                  </div>
-                </div>
-        </div>
-    );
 }
+const del = () => {
+    setResult(result.slice(0, -1))
+}
+
+const frmSubmit = (e) => {
+    e.preventDefault();
+}
+
+const clickHandler = (e) => {
+    setResult(result.concat(e.target.name));
+    console.log(result);
+}
+
+const calculate = () => {
+   // setResult(eval(result)); /// not continue next calculation with calculated value
+   // setResult(eval(result).toString()); //continue next calculation  with calculated value
+   try{
+     setResult(eval(result).toString())
+   }
+   catch(errr){
+       //let errorMsg = "no a corrrect value";
+         setResult("Error!!!");
+   }
+}
+
+  return (
+    <div className="main-container">
+      <MainHeading pageTitle="Calculator" />
+      <form onSubmit={frmSubmit}>
+        <div className="calculator">
+            <div className="calcInput">
+                <input type="text" value={result} onChange={inputHandler} />
+            </div>
+            <div className="keypad">
+                <button className="btn btn-color clear" onClick={clear}>Clear</button>
+                <button  className="btn btn-color del" onClick={del}>Del</button><br />
+                <button onClick={ clickHandler } name="7" className="btn btn-color">7</button>
+                <button onClick={ clickHandler } name="8" className="btn btn-color">8</button>
+                <button onClick={ clickHandler } name="9" className="btn btn-color">9</button>
+                <button onClick={ clickHandler } name="+" className="btn btn-color">+</button><br />
+                <button onClick={ clickHandler } name="4" className="btn btn-color">4</button>
+                <button onClick={ clickHandler } name="5" className="btn btn-color">5</button>
+                <button onClick={ clickHandler } name="6" className="btn btn-color">6</button>
+                <button onClick={ clickHandler } name="-" className="btn btn-color">-</button><br />
+                <button onClick={ clickHandler } name="1" className="btn btn-color">1</button>
+                <button onClick={ clickHandler } name="2" className="btn btn-color">2</button>
+                <button onClick={ clickHandler } name="3" className="btn btn-color">3</button>
+                <button onClick={ clickHandler } name="/" className="btn btn-color">/</button><br />
+                <button onClick={ clickHandler } name="." className="btn btn-color">.</button>
+                <button onClick={ clickHandler } name="0" className="btn btn-color">0</button>
+                <button onClick={ clickHandler } name="*" className="btn btn-color">&times;</button>
+                <button onClick={ calculate }  className="btn btn-color">=</button>
+            </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
 export default Calc;
